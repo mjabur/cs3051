@@ -42,30 +42,73 @@
     </div>
   </div>
 </div>
-<div class="card-deck p-2">
+  </head>
+  <body>
 
-  <div class="card">
-    <img src="https://thetourguy.com/wp-content/uploads/2019/04/Steak-Frites.jpeg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Steak frites</h5>
-      <p class="card-text"> Steak frites is a very common and popular dish served in brasseries throughout Europe consisting of steak paired with French fries.</p>
+    <div id="app">
+      <div class="container">
+        <div class="row">
+          <div class="col-4" v-for="item in menu">
+            <div class="card">
+              <img v-bind:src="item.img" class="card-img-top" v-bind:alt="item.description">
+              <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">{{item.description}}</p>
+
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" v-bind:data-target="'#modal-' + item.id">
+                    Picture View {{item.name.description}}
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" v-bind:id="'modal-' + item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{item.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <img v-bind:src="item.img" class="card-img-top" v-bind:alt="item.description">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <img src="https://img.taste.com.au/OpyNNkk-/taste/2016/11/pommes-puree-95111-1.jpeg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Duck confit</h5>
-      <p class="card-text">Duck confit is a French dish made with the whole duck. In Gascony, according to the families perpetuating the tradition of duck confit, all the pieces of duck are used to produce the meal.</p>
-    </div>
-    </div>
-  <div class="card">
-    <img src="https://i0.wp.com/rimmersrecipes.co.uk/wp-content/uploads/2018/08/French-Chicken-Marengo.jpg?resize=960%2C641" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Chicken Marengo</h5>
-      <p class="card-text">Chicken Marengo is a French dish consisting of a chicken sautéed in oil with garlic and tomato, garnished with fried eggs and crayfish.</p>
-    </div>
-  </div>
-</div>
+
+<script src="https://unpkg.com/vue"></script> <script>
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    menu: []
+  },
+  created: function() {
+    fetch('https://api.myjson.com/bins/6oqsj')
+      .then(response => response.json())
+      .then(json => {
+        this.menu = json.items
+      })
+  }
+})
+</script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -74,8 +117,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 </html>
-
-</body>
-</html>
-
-
