@@ -1,36 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <head>
-         <style>
-<<<<<<< HEAD
-           body {
-               background-color: #ff6666;
-               }
-=======
-             #<title> Fast Food Menu </title>
-           body (background-color;"lightred;")
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link rel="stylesheet" type="text/css" href="main.css">
+        <title> Chez Momo </title>
+        <link rel="stylesheet" type="text/css" href="main.css">
     </head>
 <body>
-<style>
->>>>>>> cd5e3b065a27ac7ae92fcfbc59d55df368fb58f1
-#myHeader {
-  background-color: blue;
-  padding: 20px;
-  text-align: center;
-  font-size: 40px;
-  color: black;
-}
-
-        </style>
-        <title> Fast Food Menu </title>
-    </head>
-<body>
-
-<div style="background-color:#e5e5e5;padding:15px;text-align:center;">
-  <h1 id="myHeader"> Fast Food Menu</h1>
-
+<div class="head">
+  <h1 id="myHeader"> Chez Momo</h1>
 
     <div class="topnav">
         <a class="active">Menu</a>
@@ -40,27 +23,97 @@
 
     </div>
 
-
 <h1> My restaurant </h1>
-<p>Fast foods are characterized as quick, easily accessible and cheap alternatives to home-cooked meals.</p>
+<p>A meal often consists of three courses, hors d'œuvre or entrée (introductory course, sometimes soup), plat principal (main course). </p>
 
 
 <h3> Main Menu </h3>
-<ul>
-<li> Burger</li>
-<li> Fried Chicken </li>
-<li> Chicken Nuggets </li>
-<li> French Fries </li>
-<li> Sandwiches </li>
-<li> Pizza </li>
-<li> Salad </li>
-</ul>
-<img id src="https://media.istockphoto.com/photos/various-fast-food-products-picture-id908663850?k=6&m=908663850&s=612x612&w=0&h=63Ba2l59K5FgPUg5ZaoKKYI5ASXU-j1RTXqOlg4pD9A=">
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    <img src="https://thetourguy.com/wp-content/uploads/2019/04/Steak-Frites.jpeg" class="card-img-top">
+    </div>
+    <div class="carousel-item">
+    <img src="https://img.taste.com.au/OpyNNkk-/taste/2016/11/pommes-puree-95111-1.jpeg" class="card-img-top">
+    </div>
+    <div class="carousel-item">
+    <img src="https://i0.wp.com/rimmersrecipes.co.uk/wp-content/uploads/2018/08/French-Chicken-Marengo.jpg?resize=960%2C641" class="card-img-top">
+    </div>
+  </div>
+</div>
+  </head>
+  <body>
+
+    <div id="app">
+      <div class="container">
+        <div class="row">
+          <div class="col-4" v-for="item in menu">
+            <div class="card">
+              <img v-bind:src="item.img" class="card-img-top" v-bind:alt="item.description">
+              <div class="card-body">
+                <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text">{{item.description}}</p>
 
 
 
-    </body>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" v-bind:data-target="'#modal-' + item.id">
+                    Picture View {{item.name.description}}
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" v-bind:id="'modal-' + item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{item.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <img v-bind:src="item.img" class="card-img-top" v-bind:alt="item.description">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script src="https://unpkg.com/vue"></script> <script>
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    menu: []
+  },
+  created: function() {
+    fetch('https://api.myjson.com/bins/6oqsj')
+      .then(response => response.json())
+      .then(json => {
+        this.menu = json.items
+      })
+  }
+})
+</script>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>
-
-
-
